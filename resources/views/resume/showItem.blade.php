@@ -1,13 +1,96 @@
-<h1>Resume of {{ $resume->user->username }}</h1>
-<h2>NAME: {{ $resume->name }}</h2>
-<h2>DATE OF BIRTH: {{ $resume->dob }}</h2>
-<h2>GENDER: {{ ($resume->gender==0)? 'M' : 'F' }}</h2>
-<h2>NATIONALITY: {{ $resume->nationality }}</h2>
-<h2>ADDRESS: {{ $resume->address }}</h2>
-<h2>PHONE: {{ $resume->phone }}</h2>
-<h2>EMAIL: {{ $resume->email }}</h2>
-<h2>WEBSITE: {{ $resume->website }}</h2>
-<h2>SUMMARY: {{ $resume->summary }}</h2>
-<h2>EDUCATION: {{ $resume->education }}</h2>
-<h2>EXPERIENCE: {{ $resume->experience }}</h2>
-<br><br>
+<div class="container border-bottom border-info">
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Full name:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->name }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Date of birth:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->dob }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Gender:
+        </div>
+        <div class="h3 col-md">
+            {{ ($resume->gender==0)? 'Male' : 'Female' }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Nationality:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->nationality }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Address:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->address }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Phone:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->phone }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Email:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->email }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Website:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->website }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Summary:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->summary }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Education Summary:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->education }}
+        </div>
+    </div>
+    <div class="row row-cols-md-2">
+        <div class="h3 col-md">
+            Experience Summary:
+        </div>
+        <div class="h3 col-md">
+            {{ $resume->experience }}
+        </div>
+    </div>
+    @if(Auth::user()->id == $resume->user->id)
+        <div class="row">
+            <a href="{{ route('resumes.edit', $resume->id) }}" class="btn btn-warning">Edit Resume</a>
+        </div>
+    @endif
+</div>
+

@@ -18,7 +18,7 @@ class NotificationController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $notifications = $user->notifications;
+        $notifications = $user->notifications->sortDesc();
 
         return view('notification.index')->with('notifications', $notifications);
     }

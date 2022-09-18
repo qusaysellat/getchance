@@ -16,13 +16,7 @@ class StudyProgramController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->usertype != 3){
-            abort(404);
-        }
-
-        $studyPrograms = Auth::user()->studyPrograms;
-
-        return view('studyprogram.index')->with('studyPrograms', $studyPrograms);
+        abort(404);
 
     }
 
@@ -62,7 +56,7 @@ class StudyProgramController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
-        return redirect()->route('study_programs.index');
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**
@@ -73,7 +67,7 @@ class StudyProgramController extends Controller
      */
     public function show(StudyProgram $studyProgram)
     {
-        return view('studyprogram.show')->with('program', $studyProgram);
+        abort(404);
     }
 
     /**
@@ -113,7 +107,7 @@ class StudyProgramController extends Controller
             'description' => $request['description'],
         ]);
 
-        return redirect()->route('study_programs.index');
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**
@@ -130,6 +124,6 @@ class StudyProgramController extends Controller
 
         $studyProgram->delete();
 
-        return redirect()->route('study_programs.index');
+        return redirect()->route('users.show', Auth::user()->id);
     }
 }

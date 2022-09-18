@@ -58,8 +58,6 @@ Route::group(['middleware' => 'web'],function () {
 
         Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
-        Route::get('/stats', [\App\Http\Controllers\StatsController::class, 'index'])->name('stats');
-
         Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
 
         Route::resource('/skills', \App\Http\Controllers\SkillController::class);

@@ -28,7 +28,7 @@ class SkillController extends Controller
      */
     public function create()
     {
-        return view('admin.skill.create');
+        abort(403);
     }
 
     /**
@@ -56,7 +56,7 @@ class SkillController extends Controller
      */
     public function show(Skill $skill)
     {
-        return view('admin.skill.show')->with('skill', $skill);
+        abort(403);
     }
 
     /**
@@ -67,7 +67,7 @@ class SkillController extends Controller
      */
     public function edit(Skill $skill)
     {
-        return view('admin.skill.edit')->with('skill', $skill);
+        abort(403);
     }
 
     /**

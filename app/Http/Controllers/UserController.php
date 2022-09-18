@@ -50,7 +50,7 @@ class UserController extends Controller
         $user1 = Auth::user();
         $user2 = User::find($id);
 
-        if(is_null($user1) or is_null($user2)){
+        if(is_null($user1) or is_null($user2) or $user2->usertype==0){
             abort(404);
         }
 

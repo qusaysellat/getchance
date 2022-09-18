@@ -1,4 +1,4 @@
-<br>
-<h1> CONTENT: {{ $notification->content }}</h1>
-<h2> CREATED AT: {{ $notification->created_at }}</h2>
-<br>
+<div class="alert alert-info">
+    <h3>{{ $notification->content }}</h3>
+    <h6>at {{ $notification->created_at }}</h6>
+</div>

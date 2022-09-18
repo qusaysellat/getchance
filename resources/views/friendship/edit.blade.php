@@ -3,11 +3,11 @@
     @csrf
     @method('PUT')
 
-    <input name="user1_id" type="hidden" value="{{ $user->id }}">
-    <input name="user2_id" type="hidden" value="{{ Auth::user()->id }}">
+    <input name="user1_id" type="hidden" value="{{ $friendship->user1->id }}">
+    <input name="user2_id" type="hidden" value="{{ $friendship->user2->id }}">
     <div class="flex flex-wrap">
         <button type="submit"
-            class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+            class="btn btn-success">
             {{ __('Approve Friendship') }}
         </button>
     </div>

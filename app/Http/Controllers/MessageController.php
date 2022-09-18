@@ -34,8 +34,8 @@ class MessageController extends Controller
 
         return view('message.index', [
             'user' => $user2,
-            'sent' => $sent,
-            'received' => $received,
+            'sent' => $sent->sortDesc(),
+            'received' => $received->sortDesc(),
         ]);
     }
 

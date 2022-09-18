@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sm:container sm:mx-auto sm:mt-10">
-    <div class="w-full sm:px-6">
+<main class="">
+    <div class="">
 
         @if (session('status'))
             <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4" role="alert">
@@ -10,21 +10,29 @@
             </div>
         @endif
 
-        <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
-
-            <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                Conversation between you and {{ $user->username }}
-            </header>
+        <section class="p-5 flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
+            <div class="alert alert-secondary">
+                <h1>Your conversation with {{ $user->username }}</h1>
+            </div>
             @include('message.create')
-            <h1>Sent Messages to {{ $user->username }}: </h1>
-            @foreach ($sent as $message )
-                @include('message.showItem')
-            @endforeach
-            <h1>Received Messages from {{ $user->username }}: </h1>
-            @foreach ($received as $message )
-                @include('message.showItem')
-            @endforeach
-            <br><br>
+            <div class="row">
+                <div class="col-md">
+                    <div class="alert alert-success">
+                        Sent
+                    </div>
+                    @foreach ($sent as $message )
+                        @include('message.showItem')
+                    @endforeach
+                </div>
+                <div class="col">
+                    <div class="alert alert-info">
+                        Received
+                    </div>
+                    @foreach ($received as $message )
+                        @include('message.showItem')
+                    @endforeach
+                </div>
+            </div>
         </section>
     </div>
 </main>

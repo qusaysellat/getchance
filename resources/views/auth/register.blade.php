@@ -2,104 +2,107 @@
 
 @section('content')
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
-    <div class="flex">
-        <div class="w-full">
-            <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
+    <div class="container">
+        <div class="container">
+            <section class="p-3 flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                    {{ __('Register') }}
+                <header class="h-1 text-center">
+                    {{ __('Please Fill The Fields With Your Information') }}
                 </header>
 
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST"
                     action="{{ route('register') }}">
                     @csrf
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">
+                                {{ __('Username') }}:
+                            </label>
 
-                    <div class="flex flex-wrap">
-                        <label for="username" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('Username') }}:
-                        </label>
+                            <input id="name" type="text"
+                                class="form-control @error('username') border-red-500 @enderror" name="username"
+                                value="{{ old('username') }}" required autocomplete="username">
+                        </div>
 
-                        <input id="name" type="text" class="form-input w-full @error('username')  border-red-500 @enderror"
-                            name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                {{ __('E-Mail Address') }}:
+                            </label>
 
-                        @error('username')
-                        <p class="text-red-500 text-xs italic mt-4">
-                            {{ $message }}
-                        </p>
-                        @enderror
-                    </div>
+                            <input id="email" type="email"
+                                class="form-control @error('email') border-red-500 @enderror" name="email"
+                                value="{{ old('email') }}" required autocomplete="email">
+                        </div>
 
-                    <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('E-Mail Address') }}:
-                        </label>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                {{ __('Password') }}:
+                            </label>
 
-                        <input id="email" type="email"
-                            class="form-input w-full @error('email') border-red-500 @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email">
+                            <input id="password" type="password"
+                                class="form-control @error('password') border-red-500 @enderror" name="password"
+                                required autocomplete="new-password">
+                        </div>
 
-                        @error('email')
-                        <p class="text-red-500 text-xs italic mt-4">
-                            {{ $message }}
-                        </p>
-                        @enderror
-                    </div>
+                        <div class="mb-3">
+                            <label for="password-confirm" class="form-label">
+                                {{ __('Confirm Password') }}:
+                            </label>
 
-                    <div class="flex flex-wrap">
-                        <label for="password" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('Password') }}:
-                        </label>
+                            <input id="password-confirm" type="password" class="form-control"
+                                name="password_confirmation" required autocomplete="new-password">
+                        </div>
 
-                        <input id="password" type="password"
-                            class="form-input w-full @error('password') border-red-500 @enderror" name="password"
-                            required autocomplete="new-password">
+                        <div class="mb-3">
+                            <label for="usertype" class="form-label">
+                                {{ __('Select Usertype') }}
+                            </label>
 
-                        @error('password')
-                        <p class="text-red-500 text-xs italic mt-4">
-                            {{ $message }}
-                        </p>
-                        @enderror
-                    </div>
+                            <select name="usertype" id="usertype"  class="form-select">
+                                <option value="1" selected> Person </option>
+                                <option value="2"> Company </option>
+                                <option value="3"> Education </option>
+                            </select>
+                        </div>
 
-                    <div class="flex flex-wrap">
-                        <label for="password-confirm" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('Confirm Password') }}:
-                        </label>
+                        <div class="mb-3">
+                            @error('username')
+                            <p class="text-red-500 text-xs italic mt-4">
+                                <span class="text-danger">{{ $message }}</span>
+                            </p>
+                            @enderror
+                            @error('email')
+                            <p class="text-red-500 text-xs italic mt-4">
+                                <span class="text-danger">{{ $message }}</span>
+                            </p>
+                            @enderror
+                            @error('password')
+                            <p class="text-red-500 text-xs italic mt-4">
+                                <span class="text-danger">{{ $message }}</span>
+                            </p>
+                            @enderror
+                            @error('usertype')
+                            <p class="text-red-500 text-xs italic mt-4">
+                                <span class="text-danger">{{ $message }}</span>
+                            </p>
+                            @enderror
+                        </div>
 
-                        <input id="password-confirm" type="password" class="form-input w-full"
-                            name="password_confirmation" required autocomplete="new-password">
-                    </div>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit"
+                                class="btn btn-lg btn-primary">
+                                {{ __('Register') }}
+                            </button>
+                        </div>
 
-                    <div class="flex flex-wrap">
-                        <label for="usertype" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
-                            {{ __('Select Usertype') }}
-                        </label>
-
-                        <select name="usertype" id="usertype"  class="form-input w-full">
-                            <option value="1" selected> Person </option>
-                            <option value="2"> Company </option>
-                            <option value="3"> Education </option>
-                        </select>
-
-                        @error('usertype')
-                        <p class="text-red-500 text-xs italic mt-4">
-                            {{ $message }}
-                        </p>
-                        @enderror
-                    </div>
-
-                    <div class="flex flex-wrap">
-                        <button type="submit"
-                            class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
-                            {{ __('Register') }}
-                        </button>
-
-                        <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
-                            {{ __('Already have an account?') }}
-                            <a class="text-blue-500 hover:text-blue-700 no-underline hover:underline" href="{{ route('login') }}">
-                                {{ __('Login') }}
-                            </a>
-                        </p>
+                        <div class="mb-3">
+                            <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
+                                {{ __('Already have an account?') }}
+                                <a class="text-blue-500 hover:text-blue-700 no-underline hover:underline" href="{{ route('login') }}">
+                                    {{ __('Login') }}
+                                </a>
+                            </p>
+                        </div>
                     </div>
                 </form>
 

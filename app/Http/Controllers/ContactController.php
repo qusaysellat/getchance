@@ -16,7 +16,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return redirect('/');
+        abort(404);
     }
 
     /**
@@ -48,7 +48,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        return view('contact.show')->with('contact', $contact);
+        abort(404);
     }
 
     /**
@@ -86,7 +86,7 @@ class ContactController extends Controller
             'website' => $request['website'],
         ]);
 
-        return redirect()->route('contacts.show', $contact);
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**

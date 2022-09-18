@@ -19,13 +19,7 @@ class JobPositionController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->usertype != 2){
-            abort(404);
-        }
-
-        $jobPositions = Auth::user()->jobPositions;
-
-        return view('jobposition.index')->with('jobPositions', $jobPositions);
+        abort(404);
     }
 
     /**
@@ -81,7 +75,7 @@ class JobPositionController extends Controller
             }
         }
 
-        return redirect()->route('job_positions.index');
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**
@@ -92,7 +86,7 @@ class JobPositionController extends Controller
      */
     public function show(JobPosition $jobPosition)
     {
-        return view('jobposition.show')->with('job', $jobPosition);
+        abort(404);
     }
 
     /**
@@ -162,7 +156,7 @@ class JobPositionController extends Controller
             }
         }
 
-        return redirect()->route('job_positions.index');
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**
@@ -179,6 +173,6 @@ class JobPositionController extends Controller
 
         $jobPosition->delete();
 
-        return redirect()->route('job_positions.index');
+        return redirect()->route('users.show', Auth::user()->id);
     }
 }

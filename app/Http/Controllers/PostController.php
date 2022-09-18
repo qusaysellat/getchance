@@ -59,6 +59,12 @@ class PostController extends Controller
             'category_id' => $request['category_id'],
         ]);
 
+        $category = $post->category;
+        $categoryImportance = $category->importance + 1;
+        $category->update([
+            'importance' => $categoryImportance
+        ]);
+
         for($i=1;$i<=3;$i++){
             $skill_id = $request['skill_'.$i];
 
@@ -70,6 +76,11 @@ class PostController extends Controller
                     'post_id' => $post->id,
                     'skill_id' => $skill->id,
                 ]);
+                $skillImportance = $skill->importance + 1;
+                $skill->update([
+                    'importance' => $skillImportance
+                ]);
+
 
             }
         }
@@ -130,12 +141,31 @@ class PostController extends Controller
 
         $request->validated();
 
+        $category = $post->category;
+        $categoryImportance = $category->importance - 1;
+        $category->update([
+            'importance' => $categoryImportance
+        ]);
+
+        foreach($post->skills as $skill){
+            $skillImportance = $skill->importance - 1;
+                $skill->update([
+                    'importance' => $skillImportance
+                ]);
+        }
+
         $post->update([
             'title' => $request['title'],
             'content' => $request['content'],
             'posttype' => $request['posttype'],
             'user_id' => $request['user_id'],
             'category_id' => $request['category_id'],
+        ]);
+
+        $category = $skill = Category::firstWhere('id', $request['category_id']);
+        $categoryImportance = $category->importance + 1;
+        $category->update([
+            'importance' => $categoryImportance
         ]);
 
         DB::table('post_skill')->where('post_id', $post->id)->delete();
@@ -150,6 +180,10 @@ class PostController extends Controller
                 DB::table('post_skill')->insert([
                     'post_id' => $post->id,
                     'skill_id' => $skill->id,
+                ]);
+                $skillImportance = $skill->importance + 1;
+                $skill->update([
+                    'importance' => $skillImportance
                 ]);
 
             }
@@ -169,6 +203,18 @@ class PostController extends Controller
         if($post->user->id != Auth::user()->id)
             abort(403);
 
+        $category = $post->category;
+        $categoryImportance = $category->importance - 1;
+        $category->update([
+            'importance' => $categoryImportance
+        ]);
+
+        foreach($post->skills as $skill){
+            $skillImportance = $skill->importance - 1;
+                $skill->update([
+                    'importance' => $skillImportance
+                ]);
+        }
         $post->delete();
 
         return redirect()->route('posts.index');

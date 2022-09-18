@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sm:container sm:mx-auto sm:mt-10">
-    <div class="w-full sm:px-6">
+<main class="">
+    <div class="">
 
         @if (session('status'))
             <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4" role="alert">
@@ -10,20 +10,42 @@
             </div>
         @endif
 
-        <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
-
-            <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                Welcome {{ Auth::user()->username }}
-            </header>
-            <div class="w-full p-6">
-                <h1>See info of user {{ $user->username }}</h1>
-                <br>
+        <section class="p-5">
+            <div class="container">
+                <div class="alert alert-secondary">
+                    <i class="h1 bi bi-person-circle"></i>
+                    <h1>{{ $user->username }}</h1>
+                    @if(Auth::user()->id != $user->id)
+                        <a class="mt-3 btn btn-primary" href="{{ route('messages.index', $user->id) }}">Send Message</a>
+                    @endif
+                </div>
                 @php
                     $contact = $user->contact;
                 @endphp
                 @include('contact.showItem')
+                <div class="alert alert-info mt-5">
+                    <h2>
+                        Study programs provided by this educational:
+                        @if(Auth::user()->id == $user->id)
+                            <a href="{{ route('study_programs.create') }}" class="btn btn-lg btn-primary"><i class="bi bi-plus-lg"></i> Create New Study Program</a>
+                        @endif
+                    </h2>
+                </div>
                 @foreach ($user->studyPrograms as $program )
-                    @include('studyprogram.showItem')
+                    @include('studyprogram.showItemExtended')
+                @endforeach
+                <div class="alert alert-info mt-5">
+                    <h2>
+                        Posts:
+                    </h2>
+                </div>
+                @if(Auth::user()->id == $user->id)
+                    <div class="p-2">
+                        <a class="btn btn-primary btn-block" href="{{ route('posts.create')}}"><i class="bi bi-plus-lg"></i> Create new Post</a>
+                    </div>
+                @endif
+                @foreach ($user->posts as $post)
+                    `@include('post.showItem')
                 @endforeach
             </div>
         </section>

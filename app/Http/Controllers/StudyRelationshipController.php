@@ -77,7 +77,7 @@ class StudyRelationshipController extends Controller
      */
     public function show(StudyRelationship $studyRelationship)
     {
-        return view('studyrelationship.show')->with('studyRelationship', $studyRelationship);
+        abort(404);
     }
 
     /**

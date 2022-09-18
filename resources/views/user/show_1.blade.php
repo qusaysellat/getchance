@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<main class="sm:container sm:mx-auto sm:mt-10">
-    <div class="w-full sm:px-6">
+<main class="">
+    <div class="">
 
         @if (session('status'))
             <div class="text-sm border border-t-8 rounded text-green-700 border-green-600 bg-green-100 px-3 py-4 mb-4" role="alert">
@@ -10,61 +10,65 @@
             </div>
         @endif
 
-        <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
-
-            <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
-                Welcome {{ Auth::user()->username }}
-            </header>
-            <div class="w-full p-6">
-                <h1>See info of user {{ $user->username }}</h1>
-                <br>
+        <section class="p-5">
+            <div class="container">
+                <div class="alert alert-secondary">
+                    <i class="h1 bi bi-person-circle"></i>
+                    <h1>{{ $user->username }}</h1>
+                    @if(Auth::user()->id != $user->id)
+                        <a class="mt-3 btn btn-primary" href="{{ route('messages.index', $user->id) }}">Send Message</a>
+                    @endif
+                </div>
                 @php
                     $resume = $user->resume;
                 @endphp
                 @include('resume.showItem')
+                <div class="alert alert-info mt-5">
+                    <h2>
+                        Education:
+                    </h2>
+                </div>
                 @foreach ($user->studyRelationshipsOfPerson as $studyRelationship)
-                    @if($studyRelationship->approved == 1)
+                    @if(true /*$studyRelationship->approved == 1*/)
                         @php
                             $program = $studyRelationship->studyProgram;
                         @endphp
                         @include('studyprogram.showItem')
                     @endif
                 @endforeach
+                <div class="alert alert-info mt-5">
+                    <h2>
+                        Experience:
+                    </h2>
+                </div>
                 @foreach ($user->jobRelationshipsOfPerson as $jobRelationship)
-                    @if($jobRelationship->approved == 1)
+                    @if(true /*$jobRelationship->approved == 1*/)
                         @php
                             $job = $jobRelationship->jobPosition;
                         @endphp
                         @include('jobposition.showItem')
                     @endif
                 @endforeach
-                @if(Auth::user()->usertype == 1)
-                    @if(($user->id != Auth::user()->id) and ($user->areFriends(Auth::user()) == false))
-                        @include('friendship.create')
-                    @endif
+
+                <div class="alert alert-info mt-5">
+                    <h2>
+                        Friendships:
+                    </h2>
+                </div>
+                @include('friendship.showFriends')
+
+                <div class="alert alert-info mt-5">
+                    <h2>
+                        Posts:
+                    </h2>
+                </div>
+                @if(Auth::user()->id == $user->id)
+                    <div class="p-2">
+                        <a class="btn btn-primary btn-block" href="{{ route('posts.create')}}"><i class="bi bi-plus-lg"></i> Create new Post</a>
+                    </div>
                 @endif
-                @foreach ($user->toFriendships as $friendship )
-                    @if($friendship->approved == 1)
-                        <h2>this user is a friend of : {{ $friendship->user2->username }}</h2>
-                    @endif
-                    @if(Auth::user()->usertype == 1)
-                        @if ($friendship->user2->id == Auth::user()->id)
-                            @if ($friendship->approved == 0)
-                                @include('friendship.edit')
-                            @endif
-                            @include('friendship.delete')
-                        @endif
-                    @endif
-                @endforeach
-                @foreach ($user->fromFriendships as $friendship )
-                    @if($friendship->approved == 1)
-                        <h2>this user is a friend of : {{ $friendship->user1->username }}</h2>
-                    @endif
-                    @if(Auth::user()->usertype == 1)
-                        @if ($friendship->user1->id == Auth::user()->id)
-                            @include('friendship.delete')
-                        @endif
-                    @endif
+                @foreach ($user->posts as $post)
+                    `@include('post.showItem')
                 @endforeach
             </div>
         </section>

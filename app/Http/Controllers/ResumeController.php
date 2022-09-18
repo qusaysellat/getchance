@@ -16,7 +16,7 @@ class ResumeController extends Controller
      */
     public function index()
     {
-        return redirect('/');
+        abort(404);
     }
 
     /**
@@ -48,7 +48,7 @@ class ResumeController extends Controller
      */
     public function show(Resume $resume)
     {
-        return view('resume.show')->with('resume', $resume);
+        abort(404);
     }
 
     /**
@@ -93,7 +93,7 @@ class ResumeController extends Controller
             'experience' => $request['experience'],
         ]);
 
-        return redirect()->route('resumes.show', $resume);
+        return redirect()->route('users.show', Auth::user()->id);
     }
 
     /**

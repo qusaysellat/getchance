@@ -2,11 +2,11 @@
 
 @section('content')
 <main class="sm:container sm:mx-auto sm:max-w-lg sm:mt-10">
-    <div class="flex">
-        <div class="w-full">
+    <div class="container">
+        <div class="container">
             <section class="flex flex-col break-words bg-white sm:border-1 sm:rounded-md sm:shadow-sm sm:shadow-lg">
 
-                <header class="font-semibold bg-gray-200 text-gray-700 py-5 px-6 sm:py-6 sm:px-8 sm:rounded-t-md">
+                <header class="h1 text-center">
                     {{ __('Edit Contact') }}
                 </header>
 
@@ -16,12 +16,12 @@
                     @method('PUT')
 
                     <div class="flex flex-wrap">
-                        <label for="address" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="address" class="form-label">
                             {{ __('Address') }}:
                         </label>
 
-                        <input id="address" type="text" class="form-input w-full @error('address')  border-red-500 @enderror"
-                            name="address" value="{{ $contact->address }}" required autocomplete="address" autofocus>
+                        <input id="address" type="text" class="form-control @error('address')  border-red-500 @enderror"
+                            name="address" value="{{ $contact->address }}" autocomplete="address" >
 
                         @error('address')
                         <p class="text-red-500 text-xs italic mt-4">
@@ -30,12 +30,12 @@
                         @enderror
                     </div>
                     <div class="flex flex-wrap">
-                        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="phone" class="form-label">
                             {{ __('Phone') }}:
                         </label>
 
-                        <input id="phone" type="text" class="form-input w-full @error('phone')  border-red-500 @enderror"
-                            name="phone" value="{{ $contact->phone }}" required autocomplete="phone" autofocus>
+                        <input id="phone" type="text" class="form-control @error('phone')  border-red-500 @enderror"
+                            name="phone" value="{{ $contact->phone }}" autocomplete="phone" >
 
                         @error('phone')
                         <p class="text-red-500 text-xs italic mt-4">
@@ -44,12 +44,12 @@
                         @enderror
                     </div>
                     <div class="flex flex-wrap">
-                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="email" class="form-label">
                             {{ __('Email') }}:
                         </label>
 
-                        <input id="email" type="text" class="form-input w-full @error('email')  border-red-500 @enderror"
-                            name="email" value="{{ $contact->email }}" required autocomplete="email" autofocus>
+                        <input id="email" type="text" class="form-control @error('email')  border-red-500 @enderror"
+                            name="email" value="{{ $contact->email }}" autocomplete="email" >
 
                         @error('email')
                         <p class="text-red-500 text-xs italic mt-4">
@@ -58,12 +58,12 @@
                         @enderror
                     </div>
                     <div class="flex flex-wrap">
-                        <label for="website" class="block text-gray-700 text-sm font-bold mb-2 sm:mb-4">
+                        <label for="website" class="form-label">
                             {{ __('Website') }}:
                         </label>
 
-                        <input id="website" type="text" class="form-input w-full @error('website')  border-red-500 @enderror"
-                            name="website" value="{{ $contact->website }}" required autocomplete="website" autofocus>
+                        <input id="website" type="text" class="form-control @error('website')  border-red-500 @enderror"
+                            name="website" value="{{ $contact->website }}" autocomplete="website" >
 
                         @error('website')
                         <p class="text-red-500 text-xs italic mt-4">
@@ -73,16 +73,11 @@
                     </div>
                     <div class="flex flex-wrap">
                         <button type="submit"
-                            class="w-full select-none font-bold whitespace-no-wrap p-3 rounded-lg text-base leading-normal no-underline text-gray-100 bg-blue-500 hover:bg-blue-700 sm:py-4">
+                            class="btn btn-primary">
                             {{ __('Update') }}
                         </button>
-
-                        <p class="w-full text-xs text-center text-gray-700 my-6 sm:text-sm sm:my-8">
-                            <a href="{{ route('contacts.show', $contact->id) }}">cancel</a>
-                        </p>
                     </div>
                 </form>
-
             </section>
         </div>
     </div>

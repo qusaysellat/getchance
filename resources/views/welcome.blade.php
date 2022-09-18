@@ -13,56 +13,99 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
-<body class="bg-gray-100 h-screen antialiased leading-none font-sans">
-<div class="flex flex-col">
-    @if(Route::has('login'))
-        <div class="absolute top-0 right-0 mt-4 mr-4 space-x-4 sm:mt-6 sm:mr-6 sm:space-x-6">
+<body class="">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url('/') }}" class="">
+                <span class="text-warning">{{ config('app.name', 'Laravel') }}</span>
+            </a>
+
+        <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navmenu"
+        >
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+          <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                @if(Auth::user() && Auth::user()->usertype == 0)
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{{ route('dashboard') }}" class="">
+                            {{ 'Dashboard' }}
+                        </a>
+                    </li>
+                    {{-- <li class="nav-item">
+                        <a class="navbar-brand" href="{{ route('stats') }}" class="">
+                            {{ 'Statistics' }}
+                        </a>
+                    </li> --}}
+                @endif
+                @guest
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="navbar-brand" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li>
+                        @endif
+                @else
+                    @if(Auth::user()->usertype!=0)
+                        <li class="nav-item">
+                            <a class="navbar-brand" href="{{ route('users.show', Auth::user()->id) }}" >{{ __('My Profile') }}</a>
+                        </li>
+                    @endif
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{{ route('posts.index') }}" >{{ __('My Posts') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{{ route('notifications.index') }}" >{{ __('Notifications') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <span>{{ Auth::user()->name }}</span>
+
+                        <a href="{{ route('logout') }}"
+                        class="navbar-brand"
+                        onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                @endguest
+            </ul>
+          </div>
+        </div>
+    </nav>
+    <div class="container p-5">
+        <div class="text-center">
+            <img src="imgs/logo.png" alt=""/>
+        </div>
+        <h1 class="mb-6 text-gray-600 text-center font-light tracking-wider text-4xl sm:mb-8 sm:text-6xl">
+            Welcome To <span class="text-warning"> GetChance</span>
+        </h1>
+        <ul class="list-group list-group-flush lead">
             @auth
-                <a href="{{ url('/home') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Home') }}</a>
+                <li class="list-group-item">
+                    You can go
+                    <a class="navbar-brand" href="{{ url('/home') }}">{{ __('Home') }}</a>
+                </li>
             @else
-                <a href="{{ route('login') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Login') }}</a>
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase">{{ __('Register') }}</a>
+                <li class="list-group-item">
+                    Already a member? Please
+                    <a class="navbar-brand" href="{{ route('login') }}">{{ __('Login') }}</a>
+                </li>
+                @if(Route::has('register'))
+                    <li class="list-group-item">
+                        New member? Please
+                        <a class="navbar-brand" href="{{ route('register') }}">{{ __('Register') }}</a>
+                    </li>
                 @endif
             @endauth
-        </div>
-    @endif
-
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="flex flex-col justify-around h-full">
-            <div>
-                <h1 class="mb-6 text-gray-600 text-center font-light tracking-wider text-4xl sm:mb-8 sm:text-6xl">
-                    {{ config('app.name', 'Laravel') }}
-                </h1>
-                <ul class="flex flex-col space-y-2 sm:flex-row sm:flex-wrap sm:space-x-8 sm:space-y-0">
-                    <li>
-                        <a href="https://laravel.com/docs" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Documentation">Documentation</a>
-                    </li>
-                    <li>
-                        <a href="https://laracasts.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Laracasts">Laracasts</a>
-                    </li>
-                    <li>
-                        <a href="https://laravel-news.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="News">News</a>
-                    </li>
-                    <li>
-                        <a href="https://nova.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Nova">Nova</a>
-                    </li>
-                    <li>
-                        <a href="https://forge.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Forge">Forge</a>
-                    </li>
-                    <li>
-                        <a href="https://vapor.laravel.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Vapor">Vapor</a>
-                    </li>
-                    <li>
-                        <a href="https://github.com/laravel/laravel" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="GitHub">GitHub</a>
-                    </li>
-                    <li>
-                        <a href="https://tailwindcss.com" class="no-underline hover:underline text-sm font-normal text-teal-800 uppercase" title="Tailwind Css">Tailwind CSS</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        </ul>
     </div>
-</div>
 </body>
 </html>
