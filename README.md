@@ -7,15 +7,19 @@ This website front-end is yet to be well-designed. However, a simple front-end i
 Try downloading the app and opening it locally. 
 
 After importing sql file "getchance.sql" to your database, try using the application in different user roles:
+
 For Admin:
 	email: admin@gmail.com
 	password: admin
+
 For Educational:
 	email: university1@gmail.com
 	password: 88888888
+
 For Company:
 	email: company1@gmail.com
 	password: 88888888
+
 For Person:
 	email: qusaysellat@gmail.com
 	password: 88888888
@@ -25,3 +29,5 @@ For detailed information, read this pdf:
 [Social Network for Job Seekers.pdf](https://github.com/qusaysellat/getchance/files/9593006/Social.Network.for.Job.Seekers.pdf)
 
 Or watch a brief video:
+
+[Social Network for Job Seekers](https://www.dropbox.com/s/8dkbifet2cp7bqp/getchance%20updated.avi?dl=0)
