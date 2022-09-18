@@ -24,10 +24,10 @@ For Person:
 	email: qusaysellat@gmail.com
 	password: 88888888
     
-For detailed information, read this pdf:    
+### For detailed information, read this pdf:    
 
 [Social Network for Job Seekers.pdf](https://github.com/qusaysellat/getchance/files/9593006/Social.Network.for.Job.Seekers.pdf)
 
-Or watch a brief video:
+### Or watch a brief video:
 
 [Social Network for Job Seekers](https://www.dropbox.com/s/8dkbifet2cp7bqp/getchance%20updated.avi?dl=0)
