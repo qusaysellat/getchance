@@ -1,5 +1,17 @@
 ## About the website
 
+--> Social network oriented for job seekers.
+
+--> Laravel v.8 and MySQL.
+
+--> Link people with the job positions provided by companies and the study programs provided by educational institutions.
+
+--> Build authenticated profiles for people by combining the auto-generated CV with the classical, written one.
+
+--> Ability to create posts under various categories and skills and to make them interactive or not.
+
+--> Admin functionalities (user verification, managing categories and skills, .. etc.)
+
 This website will allow the people, companies and universities to register themselves with detailed information added. People can add their experience and education information in a verified way (confirmation of respected companies and universities required), and after that, an auto-generated CV will be updated on peoples’ profile pages. Also, users will be able to share ideas and opportunities through posts which will be interactive.
 This website front-end is yet to be well-designed. However, a simple front-end is used to explain main functionalities.
 
