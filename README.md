@@ -42,4 +42,4 @@ For Person:
 
 ### Or watch a brief video:
 
-[Social Network for Job Seekers](https://www.dropbox.com/s/8dkbifet2cp7bqp/getchance%20updated.avi?dl=0)
+[Social Network for Job Seekers](https://www.dropbox.com/s/0frainnyszrmej5/getchance%20updated.mp4?dl=0)
